@@ -1,6 +1,6 @@
 <template>
   <div class="sidebar" :class="{ 'is-collapsed': isCollapsed }">
-    <button class="toggle-btn" @click="isCollapsed = !isCollapsed">
+    <button class="toggle-btn" @click="toggle">
       <i
         class="mdi"
         :class="isCollapsed ? 'mdi-chevron-right' : 'mdi-chevron-left'"
@@ -54,6 +54,16 @@ export default {
         { title: 'Форма', path: '/form-fields', icon: 'mdi-form-select' }
       ]
     };
+  },
+  methods: {
+    toggle() {
+      this.isCollapsed = !this.isCollapsed
+      localStorage.setItem('collapsed', this.isCollapsed)
+    }
+  },
+  mounted() {
+    const value = localStorage.getItem('collapsed')
+    this.isCollapsed = value
   }
 };
 </script>
